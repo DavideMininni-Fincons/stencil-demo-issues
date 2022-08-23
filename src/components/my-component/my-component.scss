@@ -1,0 +1,15 @@
+:host {
+  --var-background-color: white;
+}
+
+:host(.disabled) {
+  --var-background-color: blue;
+}
+
+.input-wrapper {
+  background-color: var(--var-background-color);
+}
+
+.input-label {
+  margin-right: 1rem;
+}
