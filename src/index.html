@@ -9,7 +9,7 @@
     <script nomodule src="/build/stencil-demo.js"></script>
   </head>
   <body>
-    <div>
+    <div style="padding: 2rem 0">
       <my-component>
         <input disabled slot="input" placeholder="Test disabled">
       </my-component>
@@ -20,17 +20,35 @@
         <input slot="input" placeholder="Test with id" id="test-id">
       </my-component>
     </div>
-    <div style="padding-top: 2rem">
+    <hr>
+    <div style="padding: 2rem 0">
       <component-selector>
         <button>Test 1</button>
         <button disabled>Test 2</button>
       </component-selector>
     </div>
-    <div style="padding-top: 2rem">
+    <hr>
+    <div style="padding: 2rem 0">
       <button id="dialog-trigger">Open dialog</button>
       <example-dialog trigger="dialog-trigger">
         <div>Test</div>
       </example-dialog>
     </div>
+    <hr>
+    <div style="padding: 2rem 10rem;">
+      <example-slot-container>
+        <example-slot>Link 1</example-slot>
+        <example-slot>Link 2</example-slot>
+        <example-slot>Link 3</example-slot>
+        <example-slot>Link 4</example-slot>
+        <example-slot>Link 5</example-slot>
+        <example-slot>Link 6</example-slot>
+        <example-slot>Link 7</example-slot>
+        <example-slot>Link 8</example-slot>
+        <example-slot>Link 9</example-slot>
+        <example-slot>Link 10</example-slot>
+      </example-slot-container>
+    </div>
+    <hr>
   </body>
 </html>

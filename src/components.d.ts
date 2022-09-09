@@ -9,9 +9,13 @@ export namespace Components {
     interface ComponentSelector {
     }
     interface ExampleDialog {
-        "closeMenu": () => Promise<void>;
-        "openMenu": () => Promise<void>;
+        "closeDialog": () => Promise<void>;
+        "openDialog": () => Promise<void>;
         "trigger": string | HTMLElement;
+    }
+    interface ExampleSlot {
+    }
+    interface ExampleSlotContainer {
     }
     interface MyComponent {
     }
@@ -29,6 +33,18 @@ declare global {
         prototype: HTMLExampleDialogElement;
         new (): HTMLExampleDialogElement;
     };
+    interface HTMLExampleSlotElement extends Components.ExampleSlot, HTMLStencilElement {
+    }
+    var HTMLExampleSlotElement: {
+        prototype: HTMLExampleSlotElement;
+        new (): HTMLExampleSlotElement;
+    };
+    interface HTMLExampleSlotContainerElement extends Components.ExampleSlotContainer, HTMLStencilElement {
+    }
+    var HTMLExampleSlotContainerElement: {
+        prototype: HTMLExampleSlotContainerElement;
+        new (): HTMLExampleSlotContainerElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -38,6 +54,8 @@ declare global {
     interface HTMLElementTagNameMap {
         "component-selector": HTMLComponentSelectorElement;
         "example-dialog": HTMLExampleDialogElement;
+        "example-slot": HTMLExampleSlotElement;
+        "example-slot-container": HTMLExampleSlotContainerElement;
         "my-component": HTMLMyComponentElement;
     }
 }
@@ -47,11 +65,17 @@ declare namespace LocalJSX {
     interface ExampleDialog {
         "trigger"?: string | HTMLElement;
     }
+    interface ExampleSlot {
+    }
+    interface ExampleSlotContainer {
+    }
     interface MyComponent {
     }
     interface IntrinsicElements {
         "component-selector": ComponentSelector;
         "example-dialog": ExampleDialog;
+        "example-slot": ExampleSlot;
+        "example-slot-container": ExampleSlotContainer;
         "my-component": MyComponent;
     }
 }
@@ -61,6 +85,8 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "component-selector": LocalJSX.ComponentSelector & JSXBase.HTMLAttributes<HTMLComponentSelectorElement>;
             "example-dialog": LocalJSX.ExampleDialog & JSXBase.HTMLAttributes<HTMLExampleDialogElement>;
+            "example-slot": LocalJSX.ExampleSlot & JSXBase.HTMLAttributes<HTMLExampleSlotElement>;
+            "example-slot-container": LocalJSX.ExampleSlotContainer & JSXBase.HTMLAttributes<HTMLExampleSlotContainerElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
