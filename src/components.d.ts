@@ -8,6 +8,11 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface ComponentSelector {
     }
+    interface ExampleDialog {
+        "closeMenu": () => Promise<void>;
+        "openMenu": () => Promise<void>;
+        "trigger": string | HTMLElement;
+    }
     interface MyComponent {
     }
 }
@@ -18,6 +23,12 @@ declare global {
         prototype: HTMLComponentSelectorElement;
         new (): HTMLComponentSelectorElement;
     };
+    interface HTMLExampleDialogElement extends Components.ExampleDialog, HTMLStencilElement {
+    }
+    var HTMLExampleDialogElement: {
+        prototype: HTMLExampleDialogElement;
+        new (): HTMLExampleDialogElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -26,16 +37,21 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "component-selector": HTMLComponentSelectorElement;
+        "example-dialog": HTMLExampleDialogElement;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
     interface ComponentSelector {
     }
+    interface ExampleDialog {
+        "trigger"?: string | HTMLElement;
+    }
     interface MyComponent {
     }
     interface IntrinsicElements {
         "component-selector": ComponentSelector;
+        "example-dialog": ExampleDialog;
         "my-component": MyComponent;
     }
 }
@@ -44,6 +60,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "component-selector": LocalJSX.ComponentSelector & JSXBase.HTMLAttributes<HTMLComponentSelectorElement>;
+            "example-dialog": LocalJSX.ExampleDialog & JSXBase.HTMLAttributes<HTMLExampleDialogElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
