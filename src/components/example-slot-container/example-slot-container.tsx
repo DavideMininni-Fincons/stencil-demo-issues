@@ -59,7 +59,11 @@ export class ExampleSlotContainer implements ComponentInterface {
         </li>,
         <li class="item">
           <slot name={`child-${this._slottedChildren.length} - 1`} onSlotchange={(): void => this._readChild()} />
-        </li>
+        </li>,
+        // // FIXME this will be named 'child-3' instead than 'foo'
+        // <li class="item">
+        //   <slot name='foo' onSlotchange={(): void => this._readChild()} />
+        // </li>
       ])
     } else {
       links = this._slottedChildren.map((_, index) => (
