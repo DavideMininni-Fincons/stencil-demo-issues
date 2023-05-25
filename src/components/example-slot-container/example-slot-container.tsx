@@ -46,22 +46,49 @@ export class ExampleSlotContainer implements ComponentInterface {
       child.setAttribute('slot', slotName(index))
     );
 
-    const links = this._slottedChildren.map((_, index) => (
-      <li class="item">
-        <slot name={slotName(index)} onSlotchange={(): void => this._readChild()} />
-        {index !== this._slottedChildren.length - 1 && (<span>/</span>)}
-      </li>
-    ));
-
+    let links;
     if (this._hasEllipsis) {
-      const ellipsis = (
+      links = ([
+        <li class="item">
+          <slot name='child-0' onSlotchange={(): void => this._readChild()} />
+          <span>/</span>
+        </li>,
         <li id="ellipsis" class="item">
           <example-slot id="example-slot-ellipsis" onClick={() => this._expand()}>&hellip;</example-slot>
           <span>/</span>
+        </li>,
+        <li class="item">
+          <slot name={`child-${this._slottedChildren.length} - 1`} onSlotchange={(): void => this._readChild()} />
         </li>
-      );
-      links.splice(1, links.length - 2, ellipsis);
+      ])
+    } else {
+      links = this._slottedChildren.map((_, index) => (
+        <li class="item">
+          <slot name={slotName(index)} onSlotchange={(): void => this._readChild()} />
+          {index !== this._slottedChildren.length - 1 && (<span>/</span>)}
+        </li>
+      ));
     }
+
+    // // FIXME It doesn't work - COMMENT PREVIOUS BLOCK OF CODE IF UN-COMMENT THIS!
+    // const links = this._slottedChildren.map((_, index) => (
+    //   <li class="item">
+    //     <slot name={slotName(index)} onSlotchange={(): void => this._readChild()} />
+    //     {index !== this._slottedChildren.length - 1 && (<span>/</span>)}
+    //   </li>
+    // ));
+    //
+    // if (this._hasEllipsis) {
+    //   const ellipsis = (
+    //     <li id="ellipsis" class="item">
+    //       <example-slot id="example-slot-ellipsis" onClick={() => this._expand()}>&hellip;</example-slot>
+    //       <span>/</span>
+    //     </li>
+    //   );
+    //   links.splice(1, links.length - 2, ellipsis);
+    //   // FIXME here I have two elements with the same slot name as last position - COMMENT PREVIOUS LINE IF UN-COMMENT THIS!
+    //   // links.splice(1, 0, ellipsis);
+    // }
 
     return (
       <Host>
