@@ -27,9 +27,7 @@ jobs:
           REPO_NAME: "${{ github.repository }}"
           ISSUE_NUMBER: "${{ github.event.issue.number }}"
         run: |
-          echo "Adding issue #$ISSUE_NUMBER from $REPO_NAME to project..."
-          gh project item-add "$PROJECT_URL" \
-            --issue "$ISSUE_NUMBER" \
-            --repo "$REPO_NAME"
+          echo "Adding issue #$ISSUE_NUMBER from $REPO_NAME to project $PROJECT_URL"
+          gh project item-add 1 --owner DavideMininni-Fincons --url "${{ github.event.issue.html_url }}"
 
           echo "Command executed. Check your project to confirm."
