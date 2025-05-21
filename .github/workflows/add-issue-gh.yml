@@ -19,7 +19,7 @@ jobs:
         run: |
           # The gh CLI is usually pre-installed on GitHub-hosted runners.
           # We just need to make sure it's available and authenticated.
-          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+          echo "${{ secrets.ADD_ISSUE_PROJECT }}" | gh auth login --with-token
 
       - name: Add issue to project using gh project item-add
         env:
