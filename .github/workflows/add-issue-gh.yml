@@ -2,7 +2,7 @@ name: Add issue via gh
 
 on:
   issues:
-    types: [opened, transferred]
+    types: [ opened, transferred ]
 
 jobs:
   add-issue-gh:
@@ -10,7 +10,6 @@ jobs:
     permissions:
       issues: write
       contents: read
-      projects: write
 
     steps:
       - name: Checkout repository
