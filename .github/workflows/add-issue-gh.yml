@@ -1,0 +1,36 @@
+name: Add issue via gh
+
+on:
+  issues:
+    types: [opened, transferred]
+
+jobs:
+  add-issue-gh:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+      projects: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up GitHub CLI
+        run: |
+          # The gh CLI is usually pre-installed on GitHub-hosted runners.
+          # We just need to make sure it's available and authenticated.
+          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+      - name: Add issue to project using gh project item-add
+        env:
+          PROJECT_URL: "https://github.com/users/DavideMininni-Fincons/projects/1"
+          REPO_NAME: "${{ github.repository }}"
+          ISSUE_NUMBER: "${{ github.event.issue.number }}"
+        run: |
+          echo "Adding issue #$ISSUE_NUMBER from $REPO_NAME to project..."
+          gh project item-add "$PROJECT_URL" \
+            --issue "$ISSUE_NUMBER" \
+            --repo "$REPO_NAME"
+
+          echo "Command executed. Check your project to confirm."
